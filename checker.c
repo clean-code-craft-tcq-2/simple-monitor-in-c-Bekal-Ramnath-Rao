@@ -1,30 +1,69 @@
 #include <stdio.h>
 #include <assert.h>
 
-// Defining the thresholds as global variable, why? --> if different customer need  different threshold
-#define TEMP_LIMIT_LOW 0
-#define TEMP_LIMIT_HIGH 45
-
-#define SOC_LIMIT_LOW 20
-#define SOC_LIMIT_HIGH 80
-
-#define CHARGERATE_LIMIT_LOW 0
-#define CHARGERATE_LIMIT_HIGH 0.8
-
-int compareBatteryParameter(float value,float lower_limit,float upper_limit)
+struct 
 {
-	return (!(value<lower_limit || value>upper_limit));
+	float low;
+	float high;
+}Temperature;
+
+struct  
+{
+	float low;
+	float high;
+}StateOfCharge;
+
+struct 
+{
+	float limit;
+}ChargeRate;
+
+//  why defining seperate set functions for different parameters? --> if different customer need  different range and limit
+void setSafetyRangeforTemperature(float low, float high)
+{
+	Temperature.low = low;
+	Temperature.high = high;
+}
+
+void setSafetyRangeforStateOfCharge(float low, float high)
+{
+	StateOfCharge.low = low;
+	StateOfCharge.high = high;
+}
+
+void setThresholdforChargeRate(float limit)
+{
+	ChargeRate.limit = limit;
+}
+
+int monitorBatteryTemperature(float temperature)
+{
+	return (!(temperature<Temperature.low || temperature>Temperature.high));
+}
+
+
+int monitorStateOfCharge(float soc)
+{
+	return (!(soc<StateOfCharge.low || soc>StateOfCharge.high));
+}
+
+int monitorChargeRate(float chargeRate)
+{
+	return (!(chargeRate>ChargeRate.limit));
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate)
 {
-	return (compareBatteryParameter(temperature,TEMP_LIMIT_LOW,TEMP_LIMIT_HIGH)&&
-		    compareBatteryParameter(soc,SOC_LIMIT_LOW,SOC_LIMIT_HIGH)&&
-		    compareBatteryParameter(chargeRate,CHARGERATE_LIMIT_LOW,CHARGERATE_LIMIT_HIGH));
+	return (monitorBatteryTemperature(temperature)&&
+		    monitorStateOfCharge(soc)&&
+		    monitorChargeRate(chargeRate));
 
 }
 
 int main() {
+  setSafetyRangeforTemperature(0,45);
+  setSafetyRangeforStateOfCharge(20,80);
+  setThresholdforChargeRate(0.8);
   assert(batteryIsOk(25, 70, 0.7));
   assert(!batteryIsOk(50, 85, 0));
   assert(!batteryIsOk(50,50,0.5));
