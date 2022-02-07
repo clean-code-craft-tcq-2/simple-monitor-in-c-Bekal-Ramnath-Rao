@@ -36,20 +36,79 @@ void setThresholdforChargeRate(float limit)
 	ChargeRate.limit = limit;
 }
 
+//Adding the Notification Inteface for User to Take Safety Actions
+void printOnConsole(float parameterValue, char* parameter,char* nonsafeCondition)
+{
+	printf("%s is %s than %f\n",parameter,nonsafeCondition,parameterValue);
+}
+
+void notifyTemperatureOutofRange(float temperature)
+{
+	if(temperature > Temperature.high)
+	{
+		printOnConsole(temperature,"Temperature","Higher than");
+	}
+	else
+	{
+		printOnConsole(temperature,"Temperature","Lower than");
+	}
+}
+
+void notifySOCOutofRange(float soc)
+{
+	if(soc > StateOfCharge.high)
+	{
+		printOnConsole(soc,"SOC","Higher than");
+	}
+	else
+	{
+		printOnConsole(soc,"SOC","Lower than");
+	}
+}
+
+void notifyChargeRateOutofRange(float chargeRate)
+{
+	printOnConsole(chargeRate,"ChargeRate","is above threshold");
+}
+
 int monitorBatteryTemperature(float temperature)
 {
-	return (!(temperature<Temperature.low || temperature>Temperature.high));
+	if(temperature<Temperature.low || temperature>Temperature.high)
+	{
+		notifyTemperatureOutofRange(temperature);
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }
 
 
 int monitorStateOfCharge(float soc)
 {
-	return (!(soc<StateOfCharge.low || soc>StateOfCharge.high));
+	if(soc<StateOfCharge.low || soc>StateOfCharge.high)
+	{
+		notifySOCOutofRange(soc);
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }
 
 int monitorChargeRate(float chargeRate)
 {
-	return (!(chargeRate>ChargeRate.limit));
+	if(chargeRate>ChargeRate.limit)
+	{
+		notifyChargeRateOutofRange(chargeRate);
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate)
