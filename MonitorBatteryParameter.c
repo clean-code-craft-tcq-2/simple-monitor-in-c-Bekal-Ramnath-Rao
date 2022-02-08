@@ -2,11 +2,13 @@
 #include "SetRangeForBatteryParameter.h"
 #include "NotifyOutOfRangeforBatteryParameter.h"
 
-int monitorBatteryTemperature(float temperature)
+int monitorBatteryTemperature(float temperature, 
+	    					  void (*funp_notifyOutOfRangeForBatteryParameter[])(float, void (*)(float, char*,char*)), 
+	    					  void (*funp_printOnConsole)(float, char*,char*))
 {
 	if(temperature<Temperature.low || temperature>Temperature.high)
 	{
-		notifyTemperatureOutofRange(temperature);
+		funp_notifyOutOfRangeForBatteryParameter[0](temperature,funp_printOnConsole);
 		return 0;
 	}
 	else
@@ -16,11 +18,13 @@ int monitorBatteryTemperature(float temperature)
 }
 
 
-int monitorStateOfCharge(float soc)
+int monitorStateOfCharge(float soc, 
+	                     void (*funp_notifyOutOfRangeForBatteryParameter[])(float, void (*)(float, char*,char*)), 
+	                     void (*funp_printOnConsole)(float, char*,char*))
 {
 	if(soc<StateOfCharge.low || soc>StateOfCharge.high)
 	{
-		notifySOCOutofRange(soc);
+		funp_notifyOutOfRangeForBatteryParameter[1](soc,funp_printOnConsole);
 		return 0;
 	}
 	else
@@ -29,11 +33,13 @@ int monitorStateOfCharge(float soc)
 	}
 }
 
-int monitorChargeRate(float chargeRate)
+int monitorChargeRate(float chargeRate, 
+					  void (*funp_notifyOutOfRangeForBatteryParameter[])(float, void (*)(float, char*,char*)), 
+					  void (*funp_printOnConsole)(float, char*,char*))
 {
 	if(chargeRate>ChargeRate.limit)
 	{
-		notifyChargeRateOutofRange(chargeRate);
+		funp_notifyOutOfRangeForBatteryParameter[2](chargeRate,funp_printOnConsole);
 		return 0;
 	}
 	else
