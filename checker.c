@@ -6,7 +6,18 @@
 #include "NotifyOutOfRangeforBatteryParameter.h"
 #include "PrintOnConsole.h"
 
+#define ENVIRONMENT_TEST 0
+#define ENVIRONMENT_PRODUCTION 1
+
+#define ENVIRONMENT ENVIRONMENT_TEST
+
+#if(ENVIRONMENT == ENVIRONMENT_TEST)
+#include "TestEnvironment.h"
+#endif
+
 int main() {
+ 
+#if(ENVIRONMENT == ENVIRONMENT_PRODUCTION)
   int (*funp_monitorBatteryParameter[])(float, void (*[])(float, void (*)(float, char*,char*)), void (*)(float, char*,char*)) = {monitorBatteryTemperature,
   	                                              					 							   								 monitorStateOfCharge,
   	                                              					 							   								 monitorChargeRate};
@@ -22,4 +33,7 @@ int main() {
   assert(!batteryIsOk(50,50,0.5,funp_monitorBatteryParameter,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole));
   assert(!batteryIsOk(40,85,0.5,funp_monitorBatteryParameter,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole));
   assert(!batteryIsOk(40,85,1.0,funp_monitorBatteryParameter,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole));
+#else
+  Test_Environment();
+#endif
 }

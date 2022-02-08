@@ -6,11 +6,11 @@ void notifyTemperatureOutofRange(float temperature, void (*funp_printOnConsole)(
 {
 	if(temperature > Temperature.high)
 	{
-		funp_printOnConsole(temperature,"Temperature","Higher than");
+		funp_printOnConsole(temperature,"Temperature","is Higher than");
 	}
 	else
 	{
-		funp_printOnConsole(temperature,"Temperature","Lower than");
+		funp_printOnConsole(temperature,"Temperature","is Lower than");
 	}
 }
 
@@ -18,15 +18,15 @@ void notifySOCOutofRange(float soc, void (*funp_printOnConsole)(float, char*,cha
 {
 	if(soc > StateOfCharge.high)
 	{
-		funp_printOnConsole(soc,"SOC","Higher than");
+		funp_printOnConsole(soc,"SOC","is Higher than");
 	}
 	else
 	{
-		funp_printOnConsole(soc,"SOC","Lower than");
+		funp_printOnConsole(soc,"SOC","is Lower than");
 	}
 }
 
 void notifyChargeRateOutofRange(float chargeRate, void (*funp_printOnConsole)(float, char*,char*))
 {
-	funp_printOnConsole(chargeRate,"ChargeRate","is above threshold");
+	funp_printOnConsole(chargeRate,"ChargeRate","is Higher than");
 }
