@@ -24,14 +24,6 @@ void Test_setThresholdforChargeRate(float limit)
 
 void Test_SetRangeForBatteryParameter()
 {
-  /*int (*funp_monitorBatteryParameter[])(float, void (*[])(float, void (*)(float, char*,char*)), void (*)(float, char*,char*)) = {Test_monitorBatteryTemperature,
-  	                                              					 							   								 Test_monitorStateOfCharge,
-  	                                              					 							   								 Test_monitorChargeRate};
-  void (*funp_notifyOutOfRangeForBatteryParameter[])(float, void (*)(float, char*,char*)) = {Test_notifyTemperatureOutofRange, 
-  	                                                           								 Test_notifySOCOutofRange, 
-  	                                                           								 Test_notifyChargeRateOutofRange};
-  void (*funp_printOnConsole)(float, char*,char*) = Test_printOnConsole;*/
-
   Test_setSafetyRangeforTemperature(0,45);
   Test_setSafetyRangeforStateOfCharge(20,80);
   Test_setThresholdforChargeRate(0.8);
