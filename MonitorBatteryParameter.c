@@ -15,10 +15,7 @@ int monitorBatteryTemperature(float temperature)
 	}
 	else
 	{
-		if(temperature<Temperature.lowAlert || temperature>Temperature.highAlert)
-		{
-			warningBatteryTempnearOutofRange(temperature ,funp_printOnConsole);
-		}
+		warningBatteryTempnearOutofRange(temperature ,funp_printOnConsole);
 		return 1;
 	}
 }
@@ -35,10 +32,7 @@ int monitorStateOfCharge(float soc)
 	}
 	else
 	{
-		if(soc<StateOfCharge.lowAlert || soc>StateOfCharge.highAlert)
-		{
-			warningBatterySOCnearOutofRange(soc ,funp_printOnConsole);
-		}
+		warningBatterySOCnearOutofRange(soc ,funp_printOnConsole);
 		return 1;
 	}
 }
@@ -54,10 +48,7 @@ int monitorChargeRate(float chargeRate)
 	}
 	else
 	{
-		if(chargeRate>ChargeRate.limitAlert)
-		{
-			warningBatteryChargeRatenearOutofRange(chargeRate,funp_printOnConsole);
-		}
+		warningBatteryChargeRatenearOutofRange(chargeRate,funp_printOnConsole);
 		return 1;
 	}
 }

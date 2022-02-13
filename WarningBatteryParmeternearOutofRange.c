@@ -8,7 +8,7 @@ void warningBatteryTempnearOutofRange(float temperature, void (*funp_printOnCons
 	{
 		funp_printOnConsole(Temperature.high,"Temperature","is approaching Higher limit");
 	}
-	else
+	else if(temperature < Temperature.lowAlert)
 	{
 		funp_printOnConsole(Temperature.low,"Temperature","is approaching Lower limit");
 	}
@@ -20,7 +20,7 @@ void warningBatterySOCnearOutofRange(float soc, void (*funp_printOnConsole)(floa
 	{
 		funp_printOnConsole(StateOfCharge.high,"SOC","is approaching Higher limit");
 	}
-	else
+	else if(soc < StateOfCharge.lowAlert)
 	{
 		funp_printOnConsole(StateOfCharge.low,"SOC","is approaching Lower limit");
 	}
