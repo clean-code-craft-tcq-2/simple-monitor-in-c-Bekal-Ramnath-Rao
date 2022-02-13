@@ -17,21 +17,14 @@
 
 int main() {
  
-#if(ENVIRONMENT == ENVIRONMENT_PRODUCTION)
-  int (*funp_monitorBatteryParameter[])(float, void (*[])(float, void (*)(float, char*,char*)), void (*)(float, char*,char*)) = {monitorBatteryTemperature,
-  	                                              					 							   								 monitorStateOfCharge,
-  	                                              					 							   								 monitorChargeRate};
-  void (*funp_notifyOutOfRangeForBatteryParameter[])(float, void (*)(float, char*,char*)) = {notifyTemperatureOutofRange, 
-  	                                                           								 notifySOCOutofRange, 
-  	                                                           								 notifyChargeRateOutofRange};
-  void (*funp_printOnConsole)(float, char*,char*) = printOnConsole;                                                         
+#if(ENVIRONMENT == ENVIRONMENT_PRODUCTION)                                                        
   setSafetyRangeforTemperature(0,45);
   setSafetyRangeforStateOfCharge(20,80);
   setThresholdforChargeRate(0.8);
   while(1)
   {
     /*the first 3 parameter for the below function would be read from sensor*/
-    batteryIsOk(25, 70, 0.7,funp_monitorBatteryParameter,funp_notifyOutOfRangeForBatteryParameter,funp_printOnConsole);
+    batteryIsOk(25, 70, 0.7);
   }
 #else
   Test_Environment();

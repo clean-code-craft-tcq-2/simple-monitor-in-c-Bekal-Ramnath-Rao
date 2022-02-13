@@ -7,28 +7,23 @@
 
 void Test_MonitorBatteryParameter()
 {
-	  void (*funp_notifyOutOfRangeForBatteryParameter[])(float, void (*)(float, char*,char*)) = {notifyTemperatureOutofRange, 
-  	                                                           								     notifySOCOutofRange, 
-  	                                                           								     notifyChargeRateOutofRange};
- 	  void (*funp_printOnConsole)(float, char*,char*) = printOnConsole; 
-
 	  setSafetyRangeforTemperature(0,45);
-  	  setSafetyRangeforStateOfCharge(20,80);
-  	  setThresholdforChargeRate(0.8);
+  	setSafetyRangeforStateOfCharge(20,80);
+  	setThresholdforChargeRate(0.8);
 
-  	  assert(monitorBatteryTemperature(25,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole));
-  	  assert((monitorBatteryTemperature(45,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert((monitorBatteryTemperature(0,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert(!(monitorBatteryTemperature(55,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
+	  assert(monitorBatteryTemperature(25));
+	  assert(monitorBatteryTemperature(45));
+	  assert(monitorBatteryTemperature(0));
+	  assert(!(monitorBatteryTemperature(55)));
 
-  	  assert((monitorStateOfCharge(40,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert((monitorStateOfCharge(20,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert((monitorStateOfCharge(80,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert(!(monitorStateOfCharge(90,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert(!(monitorStateOfCharge(10,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
+	  assert(monitorStateOfCharge(40));
+	  assert(monitorStateOfCharge(20));
+	  assert(monitorStateOfCharge(80));
+	  assert(!(monitorStateOfCharge(90)));
+	  assert(!(monitorStateOfCharge(10)));
 
-  	  assert((monitorChargeRate(0.4,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert((monitorChargeRate(0.8,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert((monitorChargeRate(0.0,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
-  	  assert(!(monitorChargeRate(0.9,funp_notifyOutOfRangeForBatteryParameter, funp_printOnConsole)));
+	  assert(monitorChargeRate(0.4));
+	  assert(monitorChargeRate(0.8));
+	  assert(monitorChargeRate(0.0));
+	  assert(!(monitorChargeRate(0.9)));
 }
