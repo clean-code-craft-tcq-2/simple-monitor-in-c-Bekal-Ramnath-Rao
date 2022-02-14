@@ -3,6 +3,7 @@
 #include "NotifyOutOfRangeforBatteryParameter.h"
 #include "PrintOnConsole.h"
 #include "WarningBatteryParmeternearOutofRange.h"
+#include "MessageLanguage.h"
 
 int monitorBatteryTemperature(float temperature)
 {
