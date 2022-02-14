@@ -61,8 +61,8 @@ Shorten the Semantic distance
 ## Extensions
 
 - Extension 1: Early Warning
-  - Implementation : Done
-  - Unit Test : Done
+  - Implementation : Completed
+  - Unit Test : Completed
 - Extension 2: Support a language in addition to English
-  - Implementation : Done
-  - Unit Test : Done
+  - Implementation : Completed
+  - Unit Test : Comlpleted
