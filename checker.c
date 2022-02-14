@@ -1,21 +1,32 @@
 #include <stdio.h>
 #include <assert.h>
+#include "CheckIsBatteryOK.h"
+#include "SetRangeForBatteryParameter.h"
+#include "MonitorBatteryParameter.h"
+#include "NotifyOutOfRangeforBatteryParameter.h"
+#include "PrintOnConsole.h"
 
-int batteryIsOk(float temperature, float soc, float chargeRate) {
-  if(temperature < 0 || temperature > 45) {
-    printf("Temperature out of range!\n");
-    return 0;
-  } else if(soc < 20 || soc > 80) {
-    printf("State of Charge out of range!\n");
-    return 0;
-  } else if(chargeRate > 0.8) {
-    printf("Charge Rate out of range!\n");
-    return 0;
-  }
-  return 1;
-}
+#define ENVIRONMENT_TEST 0
+#define ENVIRONMENT_PRODUCTION 1
+
+#define ENVIRONMENT ENVIRONMENT_TEST
+
+#if(ENVIRONMENT == ENVIRONMENT_TEST)
+#include "TestEnvironment.h"
+#endif
 
 int main() {
-  assert(batteryIsOk(25, 70, 0.7));
-  assert(!batteryIsOk(50, 85, 0));
+ 
+#if(ENVIRONMENT == ENVIRONMENT_PRODUCTION)                                                        
+  setSafetyRangeforTemperature(0,45);
+  setSafetyRangeforStateOfCharge(20,80);
+  setThresholdforChargeRate(0.8);
+  while(1)
+  {
+    /*the first 3 parameter for the below function would be read from sensor*/
+    batteryIsOk(25, 70, 0.7);
+  }
+#else
+  Test_Environment();
+#endif
 }
