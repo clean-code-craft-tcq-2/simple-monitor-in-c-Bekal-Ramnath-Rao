@@ -41,7 +41,7 @@ void Test_warningChargeRateprintOnConsole(float parameterLimit, char* parameter,
 {
 	if(parameterLimit == ChargeRate.limit)
 	{
-		assert(strcmp(parameter,"Charge Rate")==0);
+		assert(strcmp(parameter,"Charge Rte")==0);
 		assert(strcmp(nonsafeCondition,"is approaching Higher limit")==0);
 	}
 }

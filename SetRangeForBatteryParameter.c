@@ -1,5 +1,6 @@
 #include "SetRangeForBatteryParameter.h"
 #include "WarningBatteryParmeternearOutofRange.h"
+#include "stdio.h"
 
 //  why defining seperate set functions for different parameters? --> if different customer need  different range and limit
 void setSafetyRangeforTemperature(float low, float high)
