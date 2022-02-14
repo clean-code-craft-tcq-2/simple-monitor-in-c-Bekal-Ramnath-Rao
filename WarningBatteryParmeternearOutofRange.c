@@ -29,15 +29,15 @@ void warningBatterySOCnearOutofRange(float soc, void (*funp_printOnConsole)(floa
 {
 	if(soc > StateOfCharge.highAlert)
 	{
-		funp_printOnConsole(StateOfCharge.high,parameter_warning[0],warning[0]);
+		funp_printOnConsole(StateOfCharge.high,parameter_warning[1],warning[0]);
 	}
 	else if(soc < StateOfCharge.lowAlert)
 	{
-		funp_printOnConsole(StateOfCharge.low,parameter_warning[0],warning[1]);
+		funp_printOnConsole(StateOfCharge.low,parameter_warning[1],warning[1]);
 	}
 }
 
 void warningBatteryChargeRatenearOutofRange(float chargeRate, void (*funp_printOnConsole)(float, char*,char*))
 {
-	funp_printOnConsole(ChargeRate.limit,parameter_warning[0],warning[0]);
+	funp_printOnConsole(ChargeRate.limit,parameter_warning[2],warning[0]);
 }

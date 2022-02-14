@@ -2,6 +2,7 @@
 #include "SetRangeForBatteryParameter.h"
 #include "PrintOnConsole.h"
 #include "MessageLanguage.h"
+#include <stdio.h>
 
 #if(LANGUAGE == LANGUAGE_ENGLISH)
 char nonsafeCondition[2][30] = {"is Higher than", "is Lower than"};

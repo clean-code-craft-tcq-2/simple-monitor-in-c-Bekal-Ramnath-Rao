@@ -1,17 +1,21 @@
 #include "NotifyOutOfRangeforBatteryParameter.h"
 #include "SetRangeForBatteryParameter.h"
 #include "TestNotifyOutOfRangeforBatteryParameter.h"
+#include "MessageLanguage.h"
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 
-void Test_TemperatureprintOnConsole(float parameterValue, char* parameter,char* nonsafeCondition)
+#if(LANGUAGE == LANGUAGE_ENGLISH)
+
+void Test_TemperatureprintOnConsole(float parameterLimit, char* parameter,char* nonsafeCondition)
 {
-	if(parameterValue > Temperature.high)
+	if(parameterLimit == Temperature.high)
 	{
 		assert(strcmp(parameter,"Temperature")==0);
 		assert(strcmp(nonsafeCondition,"is Higher than")==0);
 	}
-	else if(parameterValue < Temperature.low)
+	else if(parameterLimit == Temperature.low)
 	{
 		assert(strcmp(parameter,"Temperature")==0);
 		assert(strcmp(nonsafeCondition,"is Lower than")==0);
@@ -19,28 +23,72 @@ void Test_TemperatureprintOnConsole(float parameterValue, char* parameter,char* 
 }
 
 
-void Test_SOCprintOnConsole(float parameterValue, char* parameter,char* nonsafeCondition)
+void Test_SOCprintOnConsole(float parameterLimit, char* parameter,char* nonsafeCondition)
 {
-	if(parameterValue > StateOfCharge.high)
+	if(parameterLimit == StateOfCharge.high)
 	{
-		assert(strcmp(parameter,"SOC")==0);
+		assert(strcmp(parameter,"State of Charge")==0);
 		assert(strcmp(nonsafeCondition,"is Higher than")==0);
 	}
-	else if(parameterValue < StateOfCharge.low)
+	else if(parameterLimit == StateOfCharge.low)
 	{
-		assert(strcmp(parameter,"SOC")==0);
+		assert(strcmp(parameter,"State of Charge")==0);
 		assert(strcmp(nonsafeCondition,"is Lower than")==0);
 	}
 }
 
-void Test_ChargeRateprintOnConsole(float parameterValue, char* parameter,char* nonsafeCondition)
+void Test_ChargeRateprintOnConsole(float parameterLimit, char* parameter,char* nonsafeCondition)
 {
-	if(parameterValue > ChargeRate.limit)
+	if(parameterLimit == ChargeRate.limit)
 	{
-		assert(strcmp(parameter,"ChargeRate")==0);
+		assert(strcmp(parameter,"Charge Rate")==0);
 		assert(strcmp(nonsafeCondition,"is Higher than")==0);
 	}
 }
+
+#endif
+
+#if(LANGUAGE == LANGUAGE_GERMAN)
+
+void Test_TemperatureprintOnConsole(float parameterLimit, char* parameter,char* nonsafeCondition)
+{
+	if(parameterLimit == Temperature.high)
+	{
+		assert(strcmp(parameter,"Temperatur")==0);
+		assert(strcmp(nonsafeCondition,"ist höher als")==0);
+	}
+	else if(parameterLimit == Temperature.low)
+	{
+		assert(strcmp(parameter,"Temperatur")==0);
+		assert(strcmp(nonsafeCondition,"ist niedriger als")==0);
+	}
+}
+
+
+void Test_SOCprintOnConsole(float parameterLimit, char* parameter,char* nonsafeCondition)
+{
+	if(parameterLimit == StateOfCharge.high)
+	{
+		assert(strcmp(parameter,"Ladezustand")==0);
+		assert(strcmp(nonsafeCondition,"ist höher als")==0);
+	}
+	else if(parameterLimit == StateOfCharge.low)
+	{
+		assert(strcmp(parameter,"Ladezustand")==0);
+		assert(strcmp(nonsafeCondition,"ist niedriger als")==0);
+	}
+}
+
+void Test_ChargeRateprintOnConsole(float parameterLimit, char* parameter,char* nonsafeCondition)
+{
+	if(parameterLimit == ChargeRate.limit)
+	{
+		assert(strcmp(parameter,"Ladestrom")==0);
+		assert(strcmp(nonsafeCondition,"ist höher als")==0);
+	}
+}
+
+#endif
 
 void Test_NotifyOutOfRangeforBatteryParameter()
 {
@@ -51,7 +99,6 @@ void Test_NotifyOutOfRangeforBatteryParameter()
 	setSafetyRangeforTemperature(0,45);
   	setSafetyRangeforStateOfCharge(20,80);
   	setThresholdforChargeRate(0.8);
-
   	notifyTemperatureOutofRange(25,Test_TemperatureprintOnConsole);
   	notifyTemperatureOutofRange(0,Test_TemperatureprintOnConsole);
   	notifyTemperatureOutofRange(45,Test_TemperatureprintOnConsole);

@@ -1,0 +1,6 @@
+#ifndef TESTWARNINGBATTERYPARAMETERNEAROUTOFRANGE_H__
+#define TESTWARNINGBATTERYPARAMETERNEAROUTOFRANGE_H__
+
+extern void Test_warningBatteryParameternearOutofRange();
+
+#endif
