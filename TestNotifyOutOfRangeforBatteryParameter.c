@@ -92,10 +92,6 @@ void Test_ChargeRateprintOnConsole(float parameterLimit, char* parameter,char* n
 
 void Test_NotifyOutOfRangeforBatteryParameter()
 {
-	void (*funp_printOnConsole[])(float, char*,char*) = {Test_TemperatureprintOnConsole,
-														 Test_SOCprintOnConsole,
-														 Test_ChargeRateprintOnConsole};
-
 	setSafetyRangeforTemperature(0,45);
   	setSafetyRangeforStateOfCharge(20,80);
   	setThresholdforChargeRate(0.8);
